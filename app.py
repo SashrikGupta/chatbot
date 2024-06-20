@@ -1,7 +1,16 @@
 import os
+import nltk
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from chat import get_response
+
+def initialize_nltk():
+    try:
+        nltk.data.find('tokenizers/punkt')
+    except LookupError:
+        nltk.download('punkt')
+
+initialize_nltk()
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
